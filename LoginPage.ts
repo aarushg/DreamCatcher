@@ -32,6 +32,12 @@ const LoginPage: React.FC<LoginPageProps> = ({ navigation }) => {
     }
   };
 
+  // Define the register handler
+  const handleRegister = () => {
+    // Navigate to the RegisterPage
+    navigation.navigate('RegisterPage');
+  };
+
   // Render the LoginPage component
   return React.createElement(
     View,
@@ -58,6 +64,10 @@ const LoginPage: React.FC<LoginPageProps> = ({ navigation }) => {
     React.createElement(
       Button,
       { title: "Login", onPress: handleLogin }
+    ),
+    React.createElement(
+      Button,
+      { title: "Register", onPress: handleRegister }
     )
   );
 };
