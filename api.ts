@@ -22,12 +22,12 @@ interface SaveDataResponse {
 }
 
 // Define the function to save data to the server
-export const saveData = async (data: SaveDataRequest): Promise<SaveDataResponse> => {
+export const saveData = async (itemId: string, title: string, responses: ResponseData[]): Promise<SaveDataResponse> => {
   try {
     const SAVE_DATA_ENDPOINT = `${BASE_URL}/api/save-data`;
 
     // Make a POST request to the server to save data
-    const response = await axios.post<SaveDataResponse>(SAVE_DATA_ENDPOINT, data);
+    const response = await axios.post<SaveDataResponse>(SAVE_DATA_ENDPOINT, {itemId, title, responses});
 
     // Check if the response indicates success (customize based on your server's response format)
     if (response.status === 201) {
@@ -47,9 +47,9 @@ export const saveData = async (data: SaveDataRequest): Promise<SaveDataResponse>
 };
 
 
-export const registerUser = async (username: string, email: string, password: string): Promise<any> => {
+export const registerUser = async (username: string, email: string, password: string, confirmPassword: string): Promise<any> => {
   try {
-    const response = await axios.post(`${BASE_URL}/api/register`, { username, email, password });
+    const response = await axios.post(`${BASE_URL}/api/register`, { username, email, password, confirmPassword });
     return response.data; // Adjust based on your API's response structure
   } catch (error) {
     if (axios.isAxiosError(error)) {

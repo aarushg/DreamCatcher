@@ -30,7 +30,7 @@ const App: React.FC = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={LoginPage} />
-        <Stack.Screen name="Register" component={RegisterPage} />
+        <Stack.Screen name="RegisterPage" component={RegisterPage} />
         {/* Navigates to the MainTabNavigator after login */}
         <Stack.Screen name="MainTabs" component={MainTabNavigator} options={{ headerShown: false }} />
       </Stack.Navigator>

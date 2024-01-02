@@ -14,11 +14,12 @@ const db = new sqlite3.Database('./mydb.sqlite3', (err) => {
     throw err;
   } else {
     console.log('Connected to SQLite database.');
-    db.run(`CREATE TABLE IF NOT EXISTS data (
+    db.run(`CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      itemId TEXT,
-      title TEXT,
-      responses TEXT
+      username TEXT,
+      email TEXT,
+      password TEXT,
+      name TEXT
     )`, (err) => {
       if (err) {
         console.error(err.message);
@@ -27,16 +28,16 @@ const db = new sqlite3.Database('./mydb.sqlite3', (err) => {
   }
 });
 
-// POST endpoint to save data
-app.post('/api/save-data', (req, res) => {
-  const { itemId, title, responses } = req.body;
-  const insert = 'INSERT INTO data (itemId, title, responses) VALUES (?,?,?)';
-  db.run(insert, [itemId, title, JSON.stringify(responses)], (err) => {
+// POST endpoint to register user
+app.post('/api/register', (req, res) => {
+  const { username, email, password, name } = req.body;
+  const insert = 'INSERT INTO users (username, email, password, name) VALUES (?,?,?,?)';
+  db.run(insert, [username, email, password, name], (err) => {
     if (err) {
-      console.error('Error saving data:', err);
-      res.status(500).send('Error saving data');
+      console.error('Error registering user:', err);
+      res.status(500).send('Error registering user');
     } else {
-      res.status(201).send('Data saved successfully');
+      res.status(201).send('User registered successfully');
     }
   });
 });

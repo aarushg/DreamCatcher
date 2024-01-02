@@ -16,13 +16,18 @@ type RegisterPageProps = {
 };
 
 const RegisterPage: React.FC<RegisterPageProps> = ({ navigation }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
     try {
-      const result = await registerUser(username, email, password);
+      const result = await registerUser(name, email, password);
       console.log('Registration successful', result);
 
       // Navigate to the login screen or directly log in the user
@@ -39,9 +44,9 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ navigation }) => {
       TextInput,
       {
         style: styles.input,
-        placeholder: "Username",
-        value: username,
-        onChangeText: setUsername,
+        placeholder: "Name",
+        value: name,
+        onChangeText: setName,
       }
     ),
     React.createElement(
@@ -60,6 +65,16 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ navigation }) => {
         placeholder: "Password",
         value: password,
         onChangeText: setPassword,
+        secureTextEntry: true,
+      }
+    ),
+    React.createElement(
+      TextInput,
+      {
+        style: styles.input,
+        placeholder: "Confirm Password",
+        value: confirmPassword,
+        onChangeText: setConfirmPassword,
         secureTextEntry: true,
       }
     ),
