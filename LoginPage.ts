@@ -1,3 +1,5 @@
+// LoginPage.ts
+
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 
@@ -6,9 +8,10 @@ const LoginPage = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // TODO: Implement login logic
     console.log('Login', username, password);
-    // Navigate to next screen if login is successful
+    // TODO: Implement login logic
+    // Example: Navigate to the 'MainTabs' screen upon successful login
+    navigation.navigate('MainTabs');
   };
 
   return (
