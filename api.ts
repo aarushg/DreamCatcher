@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Define the base URL of your API server
 // Consider using environment variables for different environments (development, production)
-const BASE_URL = 'https://your-api-server.com';
+const BASE_URL = 'http://localhost:5001';
 
 // Define TypeScript interfaces for your request and response data
 interface ResponseData {
@@ -42,6 +42,20 @@ export const saveData = async (data: SaveDataRequest): Promise<SaveDataResponse>
     } else {
       // Handle other types of errors
       throw new Error('An unknown error occurred while saving data');
+    }
+  }
+};
+
+
+export const registerUser = async (username: string, email: string, password: string): Promise<any> => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/register`, { username, email, password });
+    return response.data; // Adjust based on your API's response structure
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(`Registration failed: ${error.response?.data?.message || error.message}`);
+    } else {
+      throw new Error('An unknown error occurred during registration');
     }
   }
 };
