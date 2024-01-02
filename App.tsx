@@ -1,18 +1,23 @@
-import * as React from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import RegisterPage from './RegisterPage';
-import HomePage from './HomePage'; // Replace with your actual home screen
+import LoginPage from './LoginPage'; // Import your LoginPage
+import DreamCatcher from './DreamCatcher';
+import DetailsPage from './DetailsPage';
+// ... import other screens ...
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Register">
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="Register" component={RegisterPage} />
-        <Stack.Screen name="Home" component={HomePage} />
-        {/* Add other screens here */}
+        <Stack.Screen name="DreamCatcher" component={DreamCatcher} />
+        <Stack.Screen name="DetailsPage" component={DetailsPage} />
+        {/* Add other screens as needed */}
       </Stack.Navigator>
     </NavigationContainer>
   );

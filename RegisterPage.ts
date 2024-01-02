@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { registerUser } from './api'; // Adjust the path as per your project structure
 
+// Define the type for your navigation stack parameters
+type RootStackParamList = {
+  Login: undefined; // Add other screen names as keys here
+  Register: undefined;
+  // Add other screens you have in your stack here
+};
 
-const RegisterPage = ({ navigation }) => {
+// Define the props type for RegisterPage
+type RegisterPageProps = {
+  navigation: StackNavigationProp<RootStackParamList, 'Register'>;
+};
+
+const RegisterPage: React.FC<RegisterPageProps> = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -12,16 +24,13 @@ const RegisterPage = ({ navigation }) => {
     try {
       const result = await registerUser(username, email, password);
       console.log('Registration successful', result);
-  
+
       // Navigate to the login screen or directly log in the user
-      // Replace 'Login' with the name of your login screen or home screen
       navigation.navigate('Login');
     } catch (error) {
-      // Handle errors (e.g., display an alert or a message on the screen)
-      console.error(error.message);
+      console.error(error.message); // Handle errors
     }
   };
-  
 
   return (
     <View style={styles.container}>
