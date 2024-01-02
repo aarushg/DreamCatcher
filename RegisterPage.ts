@@ -32,29 +32,41 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ navigation }) => {
     }
   };
 
-  return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <Button title="Register" onPress={handleRegister} />
-    </View>
+  return React.createElement(
+    View,
+    { style: styles.container },
+    React.createElement(
+      TextInput,
+      {
+        style: styles.input,
+        placeholder: "Username",
+        value: username,
+        onChangeText: setUsername,
+      }
+    ),
+    React.createElement(
+      TextInput,
+      {
+        style: styles.input,
+        placeholder: "Email",
+        value: email,
+        onChangeText: setEmail,
+      }
+    ),
+    React.createElement(
+      TextInput,
+      {
+        style: styles.input,
+        placeholder: "Password",
+        value: password,
+        onChangeText: setPassword,
+        secureTextEntry: true,
+      }
+    ),
+    React.createElement(
+      Button,
+      { title: "Register", onPress: handleRegister }
+    )
   );
 };
 
